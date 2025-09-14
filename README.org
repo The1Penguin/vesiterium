@@ -1,0 +1,6 @@
+* vesiterium
+Gameboy color emulator thingy
+
+** Useful links for work
+- http://marc.rawer.de/Gameboy/Docs/GBCPUman.pdf
+- https://gbdev.io/pandocs/About.html

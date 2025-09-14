@@ -1,2 +1,0 @@
-# vesiterium
-Gameboy emulator thingy
