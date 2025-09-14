@@ -1,0 +1,10 @@
+name = "vesiterium"
+version = "0.1.0"
+defaultTargets = ["vesiterium"]
+
+[[lean_lib]]
+name = "Vesiterium"
+
+[[lean_exe]]
+name = "vesiterium"
+root = "Main"
