@@ -8,11 +8,9 @@ structure Pair (A : Type u) (B : Type v) where
 
 theorem mul_le_self {a b c : Nat} (p : a ≤ b) : a * c ≤ b * c := Nat.mul_le_mul p (.refl)
 
-theorem WordDivision256 { v : Word } : v.val / 256 ≤ 255 := by
-  have ⟨ val, p ⟩ := v
-  apply Nat.div_le_of_le_mul
-  sorry
-
+theorem WordDivision256 { v : Word } : v.val / 256 ≤ 255 :=
+  let ⟨ val, p ⟩ := v
+  (Nat.div_le_iff_le_mul (k := 256) (x := val) (y := 255) (by decide)).mpr p
 
 theorem mod_succ_le {a b : Nat} : (a % b.succ) ≤ b :=
   Nat.lt_succ.mp (Nat.mod_lt a (Nat.zero_lt_succ b) )
