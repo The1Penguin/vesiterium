@@ -22,3 +22,21 @@ def WordToPairByte : Word → Pair Byte Byte
   | w@(⟨ v, _⟩) => .mk
     ⟨ w.val / 256 , WordDivision256 ⟩
     ⟨ v % 256 , mod_succ_le ⟩
+
+theorem WordToPairByte_inverse {w : Word} : (PairByteToWord ∘ WordToPairByte) w = w := by
+  have ⟨ v , p ⟩ := w
+  simp [WordToPairByte, PairByteToWord, Nat.mul_comm, Nat.div_add_mod]
+
+theorem not_le_self_mod {a b : Nat} (h : b > 0) : ¬ b ≤ a % b := by
+  simp [Nat.mod_lt a h]
+
+theorem PairByteToWord_inverse (p : Pair Byte Byte) : (WordToPairByte ∘ PairByteToWord) p = p := by
+  have .mk ⟨v₁, p₁⟩ ⟨v₂, p₂⟩ := p
+  simp
+    [ PairByteToWord
+    , WordToPairByte
+    , Nat.add_div
+    , Nat.div_eq_of_lt (Nat.lt_succ.mpr p₂)
+    , if_neg (not_le_self_mod (a := v₂) (b := 256) (by decide))
+    ]
+  simp [ Nat.mod_eq_of_lt (Nat.lt_succ.mpr p₂) ]
